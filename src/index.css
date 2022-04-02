@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
 
 :root {
-  --colorPrimary: #316b83;
-  --colorPrimaryVariant: #316b83;
-  --colorSecondary: #6d8299; /* Cards Buttons */
-  --colorSecondaryVariant: #8ca1a5; /* Nav Bar, Modal Header*/
-  --colorBackground: #d5bfbf; /*Page Background*/
+  --colorPrimary: #000000;
+  --colorPrimaryVariant: #3d0000;
+  --colorSecondary: #950101; /* Cards Buttons */
+  --colorSecondaryVariant: #ff0000; /* Nav Bar, Modal Header*/
+  --colorBackground: #000000; /*Page Background*/
   --colorSurface: #d5bfbf;
   --colorError: red;
   --colorOnImages: white;

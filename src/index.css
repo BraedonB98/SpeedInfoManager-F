@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
+
+:root {
+  --colorPrimary: #316b83;
+  --colorPrimaryVariant: #316b83;
+  --colorSecondary: #6d8299; /* Cards Buttons */
+  --colorSecondaryVariant: #8ca1a5; /* Nav Bar, Modal Header*/
+  --colorBackground: #d5bfbf; /*Page Background*/
+  --colorSurface: #d5bfbf;
+  --colorError: red;
+  --colorOnImages: white;
+  --colorOnPrimary: black;
+  --colorOnSecondary: black;
+  --colorOnPrimaryVariant: black;
+  --colorOnSecondaryVariant: black;
+  --colorOnBackground: black;
+  --colorOnSurface: black;
+  --colorOnError: black;
+
+  --navHeight: 4rem;
+}
+
+#content {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--colorBackground);
+}
+
+.slide-in-left-enter {
+  transform: translateX(-100%);
+}
+
+.slide-in-left-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 200ms;
+}
+
+.slide-in-left-exit {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-in-left-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 200ms;
+}
+
+.center {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

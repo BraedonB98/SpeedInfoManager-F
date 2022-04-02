@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; //also import Navigate for default routing
 
-import AuthPage from "./.user/pages/authpage";
+import AuthPage from "./user/pages/AuthPage";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
 function App() {
@@ -17,9 +17,6 @@ function App() {
     <Router>
       <MainNavigation />
       <main>{routes}</main>
-      <footer className="Footer">
-        Copyright 2016. Monument Dental. All Rights Reserved.
-      </footer>
     </Router>
   );
 }

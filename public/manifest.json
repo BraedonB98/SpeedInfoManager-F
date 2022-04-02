@@ -1,0 +1,25 @@
+{
+  "short_name": "MD",
+  "name": "Monument Dental",
+  "icons": [
+    {
+      "src": "MDLOGO.jpg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/jpg"
+    },
+    {
+      "src": "MDLOGO.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "MDLOGO.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1A374D",
+  "background_color": "#406882"
+}

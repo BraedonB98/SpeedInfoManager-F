@@ -32,7 +32,7 @@ const NavLinks = (props) => {
           className="Nav-Item__Button"
           icon={`${
             process.env.REACT_APP_ASSET_URL
-          }/${"data/images/default.svg"}`}
+          }${"/data/images/default.svg"}`}
           onOpen={(event) => {
             setShowUserDropDown(!showUserDropDown);
             console.log(showUserDropDown);

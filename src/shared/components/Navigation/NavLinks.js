@@ -12,6 +12,7 @@ const NavLinks = (props) => {
   const auth = useContext(AuthContext);
   const [showUserDropDown, setShowUserDropDown] = useState();
   const settingsHandler = (event) => {
+    event.preventDefault();
     setShowUserDropDown(false);
     navigate("/userpreferences");
   };
@@ -24,35 +25,14 @@ const NavLinks = (props) => {
   };
   return (
     <ul className="nav-links">
-      <NavItem to="/" title={auth.isLoggedIn ? "DashBoard" : "Home"}></NavItem>
+      <NavItem to="/" title={auth.isLoggedIn ? "DashBoard" : "Login"}></NavItem>
 
-      {!auth.isLoggedIn && (
-        <NavItem
-          onClick={closeDropDownHandler}
-          to="/auth"
-          title="Login"
-        ></NavItem>
-      )}
-      {auth.isLoggedIn && (
-        <NavItem
-          onClick={closeDropDownHandler}
-          to="/todo"
-          title="To Do"
-        ></NavItem>
-      )}
-      {auth.isLoggedIn && (
-        <NavItem
-          onClick={closeDropDownHandler}
-          to="/finance"
-          title="Finance"
-        ></NavItem>
-      )}
       {auth.isLoggedIn && (
         <NavItem
           className="Nav-Item__Button"
           icon={`${
             process.env.REACT_APP_ASSET_URL
-          }/${"data/uploads/images/default.svg"}`}
+          }/${"data/images/default.svg"}`}
           onOpen={(event) => {
             setShowUserDropDown(!showUserDropDown);
             console.log(showUserDropDown);

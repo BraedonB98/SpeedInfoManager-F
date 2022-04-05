@@ -1,21 +1,21 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
 
 :root {
-  --colorPrimary: #000000;
-  --colorPrimaryVariant: #3d0000;
-  --colorSecondary: #950101; /* Cards Buttons */
-  --colorSecondaryVariant: #ff0000; /* Nav Bar, Modal Header*/
-  --colorBackground: #000000; /*Page Background*/
+  --colorPrimary: #c8b7a6;
+  --colorPrimaryVariant: #b6c199;
+  --colorSecondary: #7d94b5; /* Cards Buttons */
+  --colorSecondaryVariant: #c29591; /* Nav Bar, Modal Header*/
+  --colorBackground: #cccccc; /*Page Background*/
   --colorSurface: #d5bfbf;
   --colorError: red;
-  --colorOnImages: white;
-  --colorOnPrimary: black;
-  --colorOnSecondary: black;
-  --colorOnPrimaryVariant: black;
-  --colorOnSecondaryVariant: black;
-  --colorOnBackground: black;
-  --colorOnSurface: black;
-  --colorOnError: black;
+  --colorOnImages: #703f37;
+  --colorOnPrimary: #703f37;
+  --colorOnSecondary: #703f37;
+  --colorOnPrimaryVariant: #703f37;
+  --colorOnSecondaryVariant: #703f37;
+  --colorOnBackground: #703f37;
+  --colorOnSurface: #703f37;
+  --colorOnError: #703f37;
 
   --navHeight: 4rem;
 }

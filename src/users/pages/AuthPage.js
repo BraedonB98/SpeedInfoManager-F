@@ -46,7 +46,6 @@ const AuthPage = () => {
         }),
         { "Content-Type": "application/json" }
       );
-      console.log(responseData);
       auth.login(
         responseData._id,
         responseData.token,

@@ -11,11 +11,12 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "3.2.0",
-    "react-slideshow-image": "^3.6.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.0",
+    "react-swipeable": "^6.2.0",
     "react-transition-group": "^4.4.2"
   },
   "eslintConfig": {

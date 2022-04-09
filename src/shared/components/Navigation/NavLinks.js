@@ -10,6 +10,7 @@ import "./styling/NavLinks.css";
 const NavLinks = (props) => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const imageUrl = auth.imageUrl;
   const [showUserDropDown, setShowUserDropDown] = useState();
   const settingsHandler = (event) => {
     event.preventDefault();
@@ -20,9 +21,6 @@ const NavLinks = (props) => {
     setShowUserDropDown(false);
     auth.logout();
   };
-  const closeDropDownHandler = () => {
-    setShowUserDropDown(false);
-  };
   return (
     <ul className="nav-links">
       <NavItem to="/" title={auth.isLoggedIn ? "DashBoard" : "Login"}></NavItem>
@@ -30,12 +28,9 @@ const NavLinks = (props) => {
       {auth.isLoggedIn && (
         <NavItem
           className="Nav-Item__Button"
-          icon={`${
-            process.env.REACT_APP_ASSET_URL
-          }${"/data/images/default.svg"}`}
+          icon={`${process.env.REACT_APP_ASSET_URL}${imageUrl}`}
           onOpen={(event) => {
             setShowUserDropDown(!showUserDropDown);
-            console.log(showUserDropDown);
           }}
         >
           {showUserDropDown && (

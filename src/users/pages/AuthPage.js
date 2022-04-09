@@ -54,7 +54,6 @@ const AuthPage = () => {
         responseData.email,
         responseData.firstName,
         responseData.lastName,
-        responseData.id,
         responseData.imageUrl,
         responseData.jobCode,
         responseData.permissions,

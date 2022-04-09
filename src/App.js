@@ -9,8 +9,20 @@ import { UserAuth } from "./shared/hooks/auth-hook";
 import Dashboard from "./users/pages/Dashboard";
 
 function App() {
-  //return <h1>Let's start!</h1>;
-  const { token, login, logout, UID } = UserAuth();
+  const {
+    token,
+    login,
+    logout,
+    UID,
+    email,
+    firstName,
+    lastName,
+    imageUrl,
+    jobCode,
+    permissions,
+    phoneNumber,
+    preferredName,
+  } = UserAuth();
   let routes;
   if (token) {
     routes = (
@@ -33,6 +45,14 @@ function App() {
         UID,
         login,
         logout,
+        email,
+        firstName,
+        lastName,
+        imageUrl,
+        jobCode,
+        permissions,
+        phoneNumber,
+        preferredName,
       }}
     >
       <Router>

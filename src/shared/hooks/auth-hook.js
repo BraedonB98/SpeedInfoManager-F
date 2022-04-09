@@ -6,6 +6,14 @@ export const UserAuth = () => {
   const [token, setToken] = useState();
   const [tokenExpiration, setTokenExpiration] = useState();
   const [UID, setUID] = useState();
+  const [email, setEmail] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [imageUrl, setImageUrl] = useState();
+  const [jobCode, setJobCode] = useState();
+  const [permissions, setPermissions] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [preferredName, setPreferredName] = useState();
 
   const login = useCallback(
     (
@@ -15,7 +23,6 @@ export const UserAuth = () => {
       email,
       firstName,
       lastName,
-      id,
       imageUrl,
       jobCode,
       permissions,
@@ -24,6 +31,14 @@ export const UserAuth = () => {
     ) => {
       setToken(token);
       setUID(uid);
+      setEmail(email);
+      setFirstName(firstName);
+      setLastName(lastName);
+      setImageUrl(imageUrl);
+      setJobCode(jobCode);
+      setPermissions(permissions);
+      setPhoneNumber(phoneNumber);
+      setPreferredName(preferredName);
       if (!expiration) {
         expiration = new Date(new Date().getTime() + 1000 * 60 * 60 * 2);
         setTokenExpiration(expiration);
@@ -39,7 +54,6 @@ export const UserAuth = () => {
           email,
           firstName,
           lastName,
-          id,
           imageUrl,
           jobCode,
           permissions,
@@ -84,7 +98,6 @@ export const UserAuth = () => {
         userData.email,
         userData.firstName,
         userData.lastName,
-        userData.id,
         userData.imageUrl,
         userData.jobCode,
         userData.permissions,
@@ -94,5 +107,18 @@ export const UserAuth = () => {
     }
   }, [login]);
 
-  return { token, login, logout, UID };
+  return {
+    token,
+    login,
+    logout,
+    UID,
+    email,
+    firstName,
+    lastName,
+    imageUrl,
+    jobCode,
+    permissions,
+    phoneNumber,
+    preferredName,
+  };
 };

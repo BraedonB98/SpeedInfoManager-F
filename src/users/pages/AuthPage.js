@@ -36,7 +36,6 @@ const AuthPage = () => {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("here");
     try {
       const responseData = await sendRequest(
         `${process.env.REACT_APP_BACKEND_API_URL}/user/login`,
@@ -47,8 +46,21 @@ const AuthPage = () => {
         }),
         { "Content-Type": "application/json" }
       );
-      console.log("login success");
-      auth.login(responseData._id, responseData.token);
+      console.log(responseData);
+      auth.login(
+        responseData._id,
+        responseData.token,
+        undefined,
+        responseData.email,
+        responseData.firstName,
+        responseData.lastName,
+        responseData.id,
+        responseData.imageUrl,
+        responseData.jobCode,
+        responseData.permissions,
+        responseData.phoneNumber,
+        responseData.preferredName
+      );
       navigate("/");
     } catch (error) {
       console.log(error);

@@ -36,7 +36,14 @@ const MainNavigation = (props) => {
           <span />
         </button>
         <h1 className="main-navigation__title">
-          <Link to="/"> </Link>
+          <Link to="/">
+            {" "}
+            <img
+              className="main-navigation__logo-image"
+              src={`/logo.svg`}
+              alt="Speed Info Manager"
+            />
+          </Link>
         </h1>
         <nav className="main-navigation__header-nav">
           <NavLinks />

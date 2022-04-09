@@ -10,6 +10,12 @@
   cursor: pointer;
 }
 
+.main-navigation__logo-image {
+  padding-top: 10px;
+  width: 100px;
+  height: 60px;
+}
+
 .main-navigation__menu-btn span {
   display: block;
   width: 3rem;

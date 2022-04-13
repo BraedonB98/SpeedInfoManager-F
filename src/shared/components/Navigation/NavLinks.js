@@ -24,6 +24,7 @@ const NavLinks = (props) => {
   return (
     <ul className="nav-links">
       <NavItem to="/" title={auth.isLoggedIn ? "DashBoard" : "Login"}></NavItem>
+      {auth.isLoggedIn && <NavItem to="/count" title={"Count"}></NavItem>}
 
       {auth.isLoggedIn && (
         <NavItem

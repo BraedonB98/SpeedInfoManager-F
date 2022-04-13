@@ -7,6 +7,7 @@ import AuthPage from "./users/pages/AuthPage";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import { UserAuth } from "./shared/hooks/auth-hook";
 import Dashboard from "./users/pages/Dashboard";
+import Count from "./count/pages/Count";
 
 function App() {
   const {
@@ -27,6 +28,7 @@ function App() {
   if (token) {
     routes = (
       <Routes>
+        <Route path="/count" exact element={<Count />} />
         <Route path="/" exact element={<Dashboard />} />
       </Routes>
     );

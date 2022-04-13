@@ -31,10 +31,16 @@ const StoreMenu = (props) => {
     getStore();
   }, [props.storeNumber, sendRequest, auth.token]);
 
+  const startCount = () => {
+    console.log("starting count");
+  };
+
   return (
     <Card>
       Store {props.storeNumber}
-      {!activeCount && <h1>start Count</h1>}
+      {!activeCount && <Button onClick={startCount}>Start Count</Button>}
+      {activeCount && <Button>Continue Count</Button>}
+      {activeCount && <Button>Restart Count</Button>}
     </Card>
   );
 };

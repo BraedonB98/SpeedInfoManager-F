@@ -25,6 +25,7 @@ const NavLinks = (props) => {
     <ul className="nav-links">
       <NavItem to="/" title={auth.isLoggedIn ? "DashBoard" : "Login"}></NavItem>
       {auth.isLoggedIn && <NavItem to="/count" title={"Count"}></NavItem>}
+      {auth.isLoggedIn && <NavItem to="/parts" title={"Parts"}></NavItem>}
 
       {auth.isLoggedIn && (
         <NavItem
@@ -40,6 +41,8 @@ const NavLinks = (props) => {
               <DropDownItem onClick={logoutHandler}>Logout</DropDownItem>
             </DropDownMenu>
           )}
+          <h1>&nbsp;&nbsp;&nbsp;&nbsp;</h1>{" "}
+          {/*!probably should just do this in css but its a temp solution ^*/}
         </NavItem>
       )}
     </ul>

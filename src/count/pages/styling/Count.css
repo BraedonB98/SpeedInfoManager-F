@@ -1,0 +1,9 @@
+.count__storeMenuList{
+    list-style: none;
+    margin: 1rem auto;
+    padding: 0;
+}
+.count {
+    padding-left: 2%;
+    padding-right: 2%;
+}

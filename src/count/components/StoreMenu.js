@@ -9,6 +9,7 @@ const StoreMenu = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [activeCount, setActiveCount] = useState();
+  const [store, setStore] = useState();
 
   useEffect(() => {
     const getStore = async () => {
@@ -24,6 +25,7 @@ const StoreMenu = (props) => {
         console.log(error);
       }
       if (!error) {
+        setStore(responseData);
         setActiveCount(!!responseData.activeCount);
       }
       console.log(responseData);
@@ -37,7 +39,8 @@ const StoreMenu = (props) => {
 
   return (
     <Card>
-      Store {props.storeNumber}
+      {store && <h2>{store.name}</h2>}
+      <p>storeID={props.storeNumber}</p>
       {!activeCount && <Button onClick={startCount}>Start Count</Button>}
       {activeCount && <Button>Continue Count</Button>}
       {activeCount && <Button>Restart Count</Button>}

@@ -3,20 +3,21 @@ import { AuthContext } from "../../shared/context/auth-context";
 
 import StoreMenu from "../components/StoreMenu";
 
+import "./styling/Count.css";
+
 const Count = () => {
   const auth = useContext(AuthContext);
-  console.log(auth.permissions);
   const stores = auth.permissions.map((permission) => {
     return (
-      <li key={permission.storeID}>
+      <li className="count__storeMenuListItem" key={permission.storeID}>
         <StoreMenu storeNumber={permission.storeId} />
       </li>
     );
   });
   return (
-    <div className="Text__Body">
+    <div className="count">
       <h1>Inventory</h1>
-      {stores}
+      <ul className="count__storeMenuList">{stores}</ul>
     </div>
   );
 };

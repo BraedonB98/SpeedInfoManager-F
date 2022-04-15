@@ -28,22 +28,46 @@ const StoreMenu = (props) => {
         setStore(responseData);
         setActiveCount(!!responseData.activeCount);
       }
-      console.log(responseData);
     };
     getStore();
   }, [props.storeNumber, sendRequest, auth.token]);
 
-  const startCount = () => {
-    console.log("starting count");
+  const runCount = (type) => {
+    const count = { store: store, action: type };
+    props.activateCount(count);
   };
 
   return (
     <Card>
       {store && <h2>{store.name}</h2>}
       <p>storeID={props.storeNumber}</p>
-      {!activeCount && <Button onClick={startCount}>Start Count</Button>}
-      {activeCount && <Button>Continue Count</Button>}
-      {activeCount && <Button>Restart Count</Button>}
+      {!activeCount && (
+        <Button
+          onClick={() => {
+            runCount("StartCount");
+          }}
+        >
+          Start Count
+        </Button>
+      )}
+      {activeCount && (
+        <Button
+          onClick={() => {
+            runCount("ContinueCount");
+          }}
+        >
+          Continue Count
+        </Button>
+      )}
+      {activeCount && (
+        <Button
+          onClick={() => {
+            runCount("RestartCount");
+          }}
+        >
+          Restart Count
+        </Button>
+      )}
     </Card>
   );
 };

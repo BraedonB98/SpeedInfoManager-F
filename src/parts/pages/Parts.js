@@ -12,7 +12,9 @@ const Parts = () => {
     setNewPart(true);
   };
 
-  const newPartSubmitHandler = () => {};
+  const newPartSubmitHandler = () => {
+    setNewPart(false);
+  };
   return (
     <React.Fragment>
       <NewPartModal

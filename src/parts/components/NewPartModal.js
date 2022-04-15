@@ -14,7 +14,6 @@ import { AuthContext } from "../../shared/context/auth-context";
 
 const NewPartModal = (props) => {
   const auth = useContext(AuthContext);
-  const uid = auth.UID;
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
@@ -49,11 +48,10 @@ const NewPartModal = (props) => {
         partNumber: formState.inputs.partNumber.value,
         description: formState.inputs.description.value,
         notes: formState.inputs.notes.value,
-        uid: uid,
       };
 
       const newPart = await sendRequest(
-        `${process.env.REACT_APP_BACKEND_API_URL}/todo/createItem`, //!update this address
+        `${process.env.REACT_APP_BACKEND_API_URL}/part/`,
         "POST",
         JSON.stringify(partNew),
         {
@@ -62,7 +60,7 @@ const NewPartModal = (props) => {
         }
       );
 
-      props.submitted(newPart);
+      props.onSubmit(newPart);
     } catch (err) {}
   };
   return (

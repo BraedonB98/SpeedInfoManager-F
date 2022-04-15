@@ -27,10 +27,11 @@ const NavLinks = (props) => {
       {auth.isLoggedIn && <NavItem to="/count" title={"Count"}></NavItem>}
       {auth.isLoggedIn && <NavItem to="/parts" title={"Parts"}></NavItem>}
 
-      {auth.isLoggedIn && (
+      {auth.isLoggedIn && props.userDropDown && (
         <NavItem
           className="Nav-Item__Button"
-          icon={`${process.env.REACT_APP_ASSET_URL}${imageUrl}`}
+          //!icon={`${process.env.REACT_APP_ASSET_URL}${imageUrl}`} //change it back to this after users can upload images
+          icon={`./images/default.svg`}
           onOpen={(event) => {
             setShowUserDropDown(!showUserDropDown);
           }}
@@ -44,6 +45,12 @@ const NavLinks = (props) => {
           <h1>&nbsp;&nbsp;&nbsp;&nbsp;</h1>{" "}
           {/*!probably should just do this in css but its a temp solution ^*/}
         </NavItem>
+      )}
+      {auth.isLoggedIn && !props.userDropDown && (
+        <React.Fragment>
+          <NavItem to="/userpreferences" title={"Settings"}></NavItem>
+          <button onClick={auth.logout}>LOGOUT</button>
+        </React.Fragment>
       )}
     </ul>
   );

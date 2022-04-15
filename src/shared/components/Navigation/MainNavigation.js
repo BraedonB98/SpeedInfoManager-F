@@ -46,7 +46,7 @@ const MainNavigation = (props) => {
           </Link>
         </h1>
         <nav className="main-navigation__header-nav">
-          <NavLinks />
+          <NavLinks userDropDown={!drawerIsOpen} />
         </nav>
       </MainHeader>
     </React.Fragment>

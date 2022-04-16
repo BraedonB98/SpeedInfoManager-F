@@ -99,7 +99,9 @@ const PartDisplay = (props) => {
         {activePart && (
           <Button
             type="submit"
-            onClick={props.onNext}
+            onClick={() => {
+              props.onNext(formState.inputs.number);
+            }}
             disabled={!formState.isValid}
           >
             Next

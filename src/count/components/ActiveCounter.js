@@ -9,7 +9,7 @@ import PartDisplay from "./PartDisplay";
 const ActiveCounter = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [activePart, setActivePart] = useState(); //
+  const [activePart, setActivePart] = useState("059283"); //
 
   useEffect(() => {
     const startCount = async () => {}; //!put in the call to back end to start count

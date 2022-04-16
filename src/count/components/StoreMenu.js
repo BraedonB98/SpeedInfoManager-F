@@ -39,8 +39,7 @@ const StoreMenu = (props) => {
 
   return (
     <Card>
-      {store && <h2>{store.name}</h2>}
-      <p>storeID={props.storeNumber}</p>
+      {store && <h2>{`${store.name} - ${props.storeNumber}`}</h2>}
       {!activeCount && (
         <Button
           onClick={() => {

@@ -34,7 +34,6 @@ const PartDisplay = (props) => {
     const getPart = async () => {
       let responseData;
       try {
-        console.log("here");
         responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_API_URL}/part/${props.partNumber}`,
           "GET",
@@ -46,19 +45,17 @@ const PartDisplay = (props) => {
       }
       if (responseData) {
         setActivePart(responseData);
-        console.log(responseData);
       }
     };
     getPart();
   }, [props.partNumber, props.store, sendRequest, auth.token]);
 
-  const nextHandler = () => {};
-  const previousHandler = () => {};
-  const postponeHandler = () => {};
-
   return (
     <React.Fragment>
       <Card>
+        {!activePart && (
+          <h2 className="center">{`There seems to be an issue finding ${props.partNumber}`}</h2>
+        )}
         {activePart && <h2 className="center">{activePart.partNumber}</h2>}
         {activePart && <h4 className="center">{activePart.name}</h4>}
         {activePart && activePart.imageUrl && (
@@ -90,19 +87,19 @@ const PartDisplay = (props) => {
           />
         )}
         {activePart && (
-          <Button type="submit" onClick={previousHandler}>
+          <Button type="submit" onClick={props.onPrevious}>
             Previous
           </Button>
         )}
         {activePart && (
-          <Button type="submit" onClick={postponeHandler}>
+          <Button type="submit" onClick={props.onPostpone}>
             Postpone
           </Button>
         )}
         {activePart && (
           <Button
             type="submit"
-            onClick={nextHandler}
+            onClick={props.onNext}
             disabled={!formState.isValid}
           >
             Next

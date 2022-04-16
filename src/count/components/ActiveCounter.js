@@ -24,12 +24,22 @@ const ActiveCounter = (props) => {
     }
   }, [props.store, sendRequest, auth.token, props.action]);
 
+  const nextHandler = () => {};
+  const previousHandler = () => {};
+  const postponeHandler = () => {};
+
   return (
     <React.Fragment>
       <h1 className="center">{props.store.name}</h1>
       <Card>
         {activePart && (
-          <PartDisplay store={props.store} partNumber={activePart} />
+          <PartDisplay
+            store={props.store}
+            partNumber={activePart}
+            onNext={nextHandler}
+            onPrevious={nextHandler}
+            onPostpone={postponeHandler}
+          />
         )}
       </Card>
     </React.Fragment>

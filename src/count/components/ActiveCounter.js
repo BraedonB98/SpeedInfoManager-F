@@ -14,6 +14,7 @@ const ActiveCounter = (props) => {
 
   useEffect(() => {
     const startCount = async () => {
+      console.log("starting count");
       let time = new Date();
       let newCount = {
         name: props.store.name,
@@ -39,6 +40,7 @@ const ActiveCounter = (props) => {
       } catch (err) {}
     };
     const resumeCount = async () => {
+      console.log("resuming count");
       let responseData;
       try {
         responseData = await sendRequest(
@@ -55,6 +57,7 @@ const ActiveCounter = (props) => {
       }
     }; //find active count and get part number at the start of to count
     const restartCount = async () => {}; //!need to make backend be able to restart count
+    console.log(props.action);
     if (props.action === "StartCount") {
       startCount();
     } else if (props.action === "ContinueCount") {

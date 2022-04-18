@@ -27,6 +27,7 @@ const Count = () => {
   };
 
   const closeCountHandler = () => {
+    console.log("closing count");
     setActiveCount(null);
   };
 
@@ -41,7 +42,7 @@ const Count = () => {
       {activeCount && (
         <ActiveCounter
           store={activeCount.store}
-          action={activeCount.type}
+          action={activeCount.action}
           closeCount={closeCountHandler}
         />
       )}

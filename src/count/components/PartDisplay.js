@@ -19,6 +19,7 @@ const PartDisplay = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [activePart, setActivePart] = useState(); //part object of partnumber
+  const [previousPart, setPreviousPart] = useState(); //binary if previous is active
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -41,10 +42,15 @@ const PartDisplay = (props) => {
           { Authorization: `Bearer ${auth.token}` }
         );
       } catch (error) {
+        setActivePart(null);
         console.log(error);
       }
       if (responseData) {
+        console.log(props.previousPart);
+        setPreviousPart(props.previousPart);
         setActivePart(responseData);
+      } else {
+        setActivePart(undefined);
       }
     };
     getPart();
@@ -87,7 +93,11 @@ const PartDisplay = (props) => {
           />
         )}
         {activePart && (
-          <Button type="submit" onClick={props.onPrevious}>
+          <Button
+            type="submit"
+            onClick={props.onPrevious}
+            disabled={!previousPart}
+          >
             Previous
           </Button>
         )}

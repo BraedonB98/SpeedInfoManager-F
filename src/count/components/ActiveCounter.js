@@ -9,7 +9,7 @@ import PartDisplay from "./PartDisplay";
 const ActiveCounter = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [activePart, setActivePart] = useState("059283");
+  const [activePart, setActivePart] = useState();
   const [activeCount, setActiveCount] = useState();
 
   useEffect(() => {
@@ -36,6 +36,7 @@ const ActiveCounter = (props) => {
           }
         );
         setActiveCount(count);
+        setActivePart(count.status.toCount[0]);
         //!set next active part here
       } catch (err) {}
     };
@@ -44,7 +45,7 @@ const ActiveCounter = (props) => {
       let responseData;
       try {
         responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_API_URL}/count/${props.store.activeInventoryCount}`,
+          `${process.env.REACT_APP_BACKEND_API_URL}/inventory/${props.store.activeInventoryCount}`,
           "GET",
           null,
           { Authorization: `Bearer ${auth.token}` }
@@ -53,7 +54,9 @@ const ActiveCounter = (props) => {
         console.log(error);
       }
       if (responseData) {
-        setActivePart(responseData);
+        console.log(responseData);
+        setActiveCount(responseData);
+        setActivePart(responseData.status.toCount[0]);
       }
     }; //find active count and get part number at the start of to count
     const restartCount = async () => {}; //!need to make backend be able to restart count
@@ -72,9 +75,9 @@ const ActiveCounter = (props) => {
       let partCount = {
         pid: activePart,
         cid: activeCount._id,
-        counted: counted,
+        counted: counted.value,
       };
-      const count = await sendRequest(
+      const nextPart = await sendRequest(
         `${process.env.REACT_APP_BACKEND_API_URL}/inventory/countNext/`,
         "PATCH",
         JSON.stringify(partCount),
@@ -83,21 +86,37 @@ const ActiveCounter = (props) => {
           Authorization: `Bearer ${auth.token}`,
         }
       );
-      setActiveCount(count);
-      //!set active part to next in array
+      setActivePart(nextPart);
     } catch (err) {}
   };
-  const previousHandler = () => {};
+  const previousHandler = async () => {
+    try {
+      let requestData = {
+        cid: activeCount._id,
+      };
+      const prevPart = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_API_URL}/inventory/undoCount/`,
+        "PATCH",
+        JSON.stringify(requestData),
+        {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        }
+      );
+      setActivePart(prevPart);
+    } catch (err) {}
+  };
   const postponeHandler = () => {};
 
   return (
     <React.Fragment>
       <h1 className="center">{props.store.name}</h1>
       <Card>
-        {activePart && (
+        {activePart && activeCount && (
           <PartDisplay
             store={props.store}
             partNumber={activePart}
+            previousPart={true} //!needs to be updated to keep track of if there is a previous part
             onNext={(count) => {
               nextHandler(count);
             }}

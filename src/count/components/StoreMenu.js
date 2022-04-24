@@ -9,6 +9,7 @@ const StoreMenu = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [activeCount, setActiveCount] = useState();
+  //const [finishedCount, setFinishedCount] = useState();
   const [store, setStore] = useState();
 
   useEffect(() => {
@@ -26,7 +27,8 @@ const StoreMenu = (props) => {
       }
       if (!error) {
         setStore(responseData);
-        setActiveCount(!!responseData.activeCount);
+        setActiveCount(!!responseData.activeInventoryCount);
+        //setFinishedCount(responseData.activeInventoryCount.length !== 0);
       }
     };
     getStore();
@@ -35,6 +37,9 @@ const StoreMenu = (props) => {
   const runCount = (type) => {
     const count = { store: store, action: type };
     props.activateCount(count);
+  };
+  const generateCountHandler = (type) => {
+    props.generateCount(store);
   };
 
   return (
@@ -49,6 +54,15 @@ const StoreMenu = (props) => {
           Start Count
         </Button>
       )}
+      {/* {!activeCount && (
+        <Button
+          onClick={() => {
+            generateCountHandler();
+          }}
+        >
+          Generate Count
+        </Button>
+      )} */}
       {activeCount && (
         <Button
           onClick={() => {

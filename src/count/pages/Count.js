@@ -16,11 +16,19 @@ const Count = () => {
           activateCount={(countInfo) => {
             activateCountHandler(countInfo);
           }}
+          // generateCount={(countInfo) => {
+          //   generateCountHandler(countInfo);
+          // }}
           storeNumber={permission.storeId}
         />
       </li>
     );
   });
+
+  const generateCountHandler = (store) => {
+    console.log(store);
+    //!generate excel sheet here
+  };
 
   const activateCountHandler = (countInfo) => {
     setActiveCount(countInfo);

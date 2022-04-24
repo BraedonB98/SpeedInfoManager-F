@@ -58,15 +58,20 @@ const PartDisplay = (props) => {
 
   return (
     <React.Fragment>
-      <Card>
+      <Card className="part-display__content">
         {!activePart && (
           <h2 className="center">{`There seems to be an issue finding ${props.partNumber}`}</h2>
         )}
-        {activePart && <h2 className="center">{activePart.partNumber}</h2>}
-        {activePart && <h4 className="center">{activePart.name}</h4>}
+        {activePart && (
+          <h2 className="part-display__header ">{activePart.partNumber}</h2>
+        )}
+        {activePart && (
+          <h4 className="part-display__header">{activePart.name}</h4>
+        )}
+
         {activePart && activePart.imageUrl && (
           <img
-            className="part-display__part-image center"
+            className="part-display__part-image"
             src={`${process.env.REACT_APP_ASSET_URL}/${activePart.imageUrl}`}
             alt={activePart.partNumber}
           />
@@ -80,7 +85,7 @@ const PartDisplay = (props) => {
         )}
         {activePart && (
           <Input
-            className="new-item-modal__text-input new-item-modal__input"
+            className="part-display__count-input"
             id="number"
             element="input"
             type="text"
@@ -92,31 +97,39 @@ const PartDisplay = (props) => {
             initialValid={false}
           />
         )}
-        {activePart && (
-          <Button
-            type="submit"
-            onClick={props.onPrevious}
-            disabled={!previousPart}
-          >
-            Previous
-          </Button>
-        )}
-        {activePart && (
-          <Button type="submit" onClick={props.onPostpone}>
-            Postpone
-          </Button>
-        )}
-        {activePart && (
-          <Button
-            type="submit"
-            onClick={() => {
-              props.onNext(formState.inputs.number);
-            }}
-            disabled={!formState.isValid}
-          >
-            Next
-          </Button>
-        )}
+        <div className="part-display__navigation-buttons">
+          {activePart && (
+            <Button
+              className="part-display__navigation-button-item"
+              type="submit"
+              onClick={props.onPrevious}
+              disabled={!previousPart}
+            >
+              Previous
+            </Button>
+          )}
+          {activePart && (
+            <Button
+              type="submit"
+              onClick={props.onPostpone}
+              className="part-display__navigation-button-item"
+            >
+              Postpone
+            </Button>
+          )}
+          {activePart && (
+            <Button
+              type="submit"
+              className="part-display__navigation-button-item"
+              onClick={() => {
+                props.onNext(formState.inputs.number);
+              }}
+              disabled={!formState.isValid}
+            >
+              Next
+            </Button>
+          )}
+        </div>
       </Card>
     </React.Fragment>
   );

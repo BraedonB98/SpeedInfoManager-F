@@ -1,10 +1,32 @@
+.part-display__content{
+  display: flex;
+  flex-direction: column;
+}
+.part-display__header{
+  align-self: center;
+  padding: 0;
+  margin:0;
+}
 .part-display__logo-image {
     padding-top: 10px;
     width: 300px;
     height: 300px;
+    align-self: center;
   }
   .part-display__part-image{
     padding-top: 10px;
     width: 300px;
     height: 300px;
+    align-self: center;
+  }
+  .part-display__count-input label{
+    display:block;
+    text-align: center; 
+  }
+  .part-display__navigation-buttons{
+    display:flex;
+    justify-content: space-evenly;
+  }
+  .part-display__navigation-button-item{
+    flex-grow:1;
   }

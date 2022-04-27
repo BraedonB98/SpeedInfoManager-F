@@ -12,12 +12,14 @@ import Card from "../../shared/components/UIElements/Card";
 import Input from "../../shared/components/FormElements/Input";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import NewPartModal from "../../parts/components/NewPartModal";
 
 import "./styling/PartDisplay.css";
 
 const PartDisplay = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [newPart, setNewPart] = useState(false);
   const [activePart, setActivePart] = useState(); //part object of partnumber
   const [previousPart, setPreviousPart] = useState(); //binary if previous is active
 
@@ -58,9 +60,27 @@ const PartDisplay = (props) => {
 
   return (
     <React.Fragment>
+      <NewPartModal
+        onClear={() => {
+          setNewPart(false);
+        }}
+        onSubmit={() => {
+          setNewPart(false);
+        }}
+        open={newPart}
+      />
       <Card className="part-display__content">
         {!activePart && (
-          <h2 className="center">{`There seems to be an issue finding ${props.partNumber}`}</h2>
+          <React.Fragment>
+            <h2 className="center">{`There seems to be an issue finding ${props.partNumber}`}</h2>
+            <Button
+              onClick={() => {
+                setNewPart(true);
+              }}
+            >
+              New Part
+            </Button>
+          </React.Fragment>
         )}
         {activePart && (
           <h2 className="part-display__header ">{activePart.partNumber}</h2>

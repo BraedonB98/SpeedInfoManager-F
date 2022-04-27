@@ -4,6 +4,8 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 const StoreMenu = (props) => {
   const auth = useContext(AuthContext);
@@ -43,18 +45,21 @@ const StoreMenu = (props) => {
   };
 
   return (
-    <Card>
-      {store && <h2>{`${store.name} - ${props.storeNumber}`}</h2>}
-      {!activeCount && (
-        <Button
-          onClick={() => {
-            runCount("StartCount");
-          }}
-        >
-          Start Count
-        </Button>
-      )}
-      {/* {!activeCount && (
+    <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      <Card>
+        {isLoading && <LoadingSpinner asOverlay />}
+        {store && <h2>{`${store.name} - ${props.storeNumber}`}</h2>}
+        {!activeCount && (
+          <Button
+            onClick={() => {
+              runCount("StartCount");
+            }}
+          >
+            Start Count
+          </Button>
+        )}
+        {/* {!activeCount && (
         <Button
           onClick={() => {
             generateCountHandler();
@@ -63,25 +68,26 @@ const StoreMenu = (props) => {
           Generate Count
         </Button>
       )} */}
-      {activeCount && (
-        <Button
-          onClick={() => {
-            runCount("ContinueCount");
-          }}
-        >
-          Continue Count
-        </Button>
-      )}
-      {activeCount && (
-        <Button
-          onClick={() => {
-            runCount("RestartCount");
-          }}
-        >
-          Restart Count
-        </Button>
-      )}
-    </Card>
+        {activeCount && (
+          <Button
+            onClick={() => {
+              runCount("ContinueCount");
+            }}
+          >
+            Continue Count
+          </Button>
+        )}
+        {activeCount && (
+          <Button
+            onClick={() => {
+              runCount("RestartCount");
+            }}
+          >
+            Restart Count
+          </Button>
+        )}
+      </Card>
+    </React.Fragment>
   );
 };
 

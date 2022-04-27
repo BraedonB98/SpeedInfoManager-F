@@ -60,6 +60,8 @@ const PartDisplay = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && <LoadingSpinner asOverlay />}
       <NewPartModal
         onClear={() => {
           setNewPart(false);

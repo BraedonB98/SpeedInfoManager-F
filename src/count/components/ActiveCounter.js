@@ -5,6 +5,8 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import Button from "../../shared/components/FormElements/Button";
 import Card from "../../shared/components/UIElements/Card";
 import PartDisplay from "./PartDisplay";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 const ActiveCounter = (props) => {
   const auth = useContext(AuthContext);
@@ -110,8 +112,10 @@ const ActiveCounter = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <h1 className="center">{props.store.name}</h1>
       <Card>
+        {isLoading && <LoadingSpinner asOverlay />}
         {activePart && activeCount && (
           <PartDisplay
             store={props.store}

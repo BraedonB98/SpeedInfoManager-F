@@ -61,7 +61,6 @@ const PartDisplay = (props) => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      {isLoading && <LoadingSpinner asOverlay />}
       <NewPartModal
         onClear={() => {
           setNewPart(false);
@@ -72,6 +71,7 @@ const PartDisplay = (props) => {
         open={newPart}
       />
       <Card className="part-display__content">
+        {isLoading && <LoadingSpinner className="center" />}
         {!activePart && (
           <React.Fragment>
             <h2 className="center">{`There seems to be an issue finding ${props.partNumber}`}</h2>

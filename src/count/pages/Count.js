@@ -9,6 +9,14 @@ import "./styling/Count.css";
 const Count = () => {
   const [activeCount, setActiveCount] = useState();
   const auth = useContext(AuthContext);
+  const activateCountHandler = (countInfo) => {
+    setActiveCount(countInfo);
+  };
+
+  const closeCountHandler = () => {
+    setActiveCount(null);
+  };
+
   const stores = auth.permissions.map((permission) => {
     return (
       <li className="count__storeMenuListItem" key={permission.storeID}>
@@ -25,26 +33,12 @@ const Count = () => {
     );
   });
 
-  const generateCountHandler = (store) => {
-    console.log(store);
-    //!generate excel sheet here
-  };
-
-  const activateCountHandler = (countInfo) => {
-    setActiveCount(countInfo);
-  };
-
-  const closeCountHandler = () => {
-    console.log("closing count");
-    setActiveCount(null);
-  };
-
   return (
     <div className="count">
       {!activeCount && (
         <React.Fragment>
           <h1 className="center">Inventory</h1>
-          <ul className="count__storeMenuList">{stores}</ul>
+          <ul className="count__store-menu-list">{stores}</ul>
         </React.Fragment>
       )}
       {activeCount && (

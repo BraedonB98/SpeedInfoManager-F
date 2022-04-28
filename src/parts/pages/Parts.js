@@ -6,7 +6,6 @@ import NewPartModal from "../components/NewPartModal";
 const Parts = () => {
   const auth = useContext(AuthContext);
   const [newPart, setNewPart] = useState(false);
-  console.log(auth.permissions);
 
   const newPartButtonHandler = () => {
     setNewPart(true);

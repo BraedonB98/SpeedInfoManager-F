@@ -39,7 +39,6 @@ const ActiveCounter = (props) => {
         );
         setActiveCount(count);
         setActivePart(count.status.toCount[0]);
-        //!set next active part here
       } catch (err) {}
     };
     const resumeCount = async () => {

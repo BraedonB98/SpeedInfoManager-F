@@ -1,0 +1,7 @@
+.store-menu__navigation-buttons{
+    display:flex;
+    justify-content: space-evenly;
+  }
+  .store-menu__navigation-button-item{
+    flex-grow:1;
+  }

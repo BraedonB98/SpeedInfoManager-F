@@ -39,23 +39,7 @@ const StoreMenu = (props) => {
     props.activateCount(count);
   };
   const closeCountHandler = async () => {
-    var tempStore = store;
-    tempStore.inventoryCountHistory.push(tempStore.activateInventoryCount); //saves from needing to send back revised store between backend and frontend
-    tempStore.activateInventoryCount = null;
-    console.log(tempStore);
-    //! try {
-    //   await sendRequest(
-    //     `${process.env.REACT_APP_BACKEND_API_URL}/inventory/countNext/`,
-    //     "PATCH",
-    //     JSON.stringify({ sid: store.storeNumber }),
-    //     {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${auth.token}`,
-    //     }
-    //   );
-    //   setStore(tempStore);
-    //   setActiveCount(null);
-    // } catch (error) {}
+    props.submitCount(store);
   };
 
   return (

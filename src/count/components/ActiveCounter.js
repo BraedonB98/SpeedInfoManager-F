@@ -143,7 +143,7 @@ const ActiveCounter = (props) => {
           <Button
             className="active-counter__header-submit-button-item"
             onClick={() => {
-              props.submitCount();
+              props.submitCount(props.store);
             }}
           >
             Submit

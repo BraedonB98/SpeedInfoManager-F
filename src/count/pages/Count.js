@@ -16,9 +16,27 @@ const Count = () => {
   const closeCountHandler = () => {
     setActiveCount(null);
   };
-  const submitCountHandler = () => {
-    setActiveCount(null);
-    //!need to submit count
+  const submitCountHandler = (store) => {
+    console.log("submitting count");
+    //!get store -- not all stores passed in may be accurate
+
+    var tempStore = store; //!can get rid of temp store because I am no longer on use state
+    tempStore.inventoryCountHistory.push(tempStore.activateInventoryCount); //saves from needing to send back revised store between backend and frontend
+    tempStore.activateInventoryCount = null;
+    //console.log(tempStore);
+    //! try {
+    //   await sendRequest(
+    //     `${process.env.REACT_APP_BACKEND_API_URL}/inventory/countNext/`,
+    //     "PATCH",
+    //     JSON.stringify({ sid: store.storeNumber }),
+    //     {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${auth.token}`,
+    //     }
+    //   );
+    //   setStore(tempStore);
+    //   setActiveCount(null);
+    // } catch (error) {}
   };
 
   const stores = auth.permissions.map((permission) => {
@@ -28,9 +46,7 @@ const Count = () => {
           activateCount={(countInfo) => {
             activateCountHandler(countInfo);
           }}
-          // generateCount={(countInfo) => {
-          //   generateCountHandler(countInfo);
-          // }}
+          submitCount={submitCountHandler}
           storeNumber={permission.storeId}
         />
       </li>

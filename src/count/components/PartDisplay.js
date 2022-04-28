@@ -21,7 +21,6 @@ const PartDisplay = (props) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [newPart, setNewPart] = useState(false);
   const [activePart, setActivePart] = useState(); //part object of partnumber
-  const [previousPart, setPreviousPart] = useState(); //binary if previous is active
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -43,16 +42,10 @@ const PartDisplay = (props) => {
           null,
           { Authorization: `Bearer ${auth.token}` }
         );
+        setActivePart(responseData);
       } catch (error) {
         setActivePart(null);
         console.log(error);
-      }
-      if (responseData) {
-        console.log(props.previousPart);
-        setPreviousPart(props.previousPart);
-        setActivePart(responseData);
-      } else {
-        setActivePart(undefined);
       }
     };
     getPart();
@@ -65,8 +58,9 @@ const PartDisplay = (props) => {
         onClear={() => {
           setNewPart(false);
         }}
-        onSubmit={() => {
+        onSubmit={(partSubmitted) => {
           setNewPart(false);
+          setActivePart(partSubmitted);
         }}
         open={newPart}
       />
@@ -75,13 +69,24 @@ const PartDisplay = (props) => {
         {!activePart && (
           <React.Fragment>
             <h2 className="center">{`There seems to be an issue finding ${props.partNumber}`}</h2>
-            <Button
-              onClick={() => {
-                setNewPart(true);
-              }}
-            >
-              New Part
-            </Button>
+            <div className="part-display__navigation-buttons">
+              <Button
+                className="part-display__navigation-button-item"
+                onClick={() => {
+                  props.onPrevious();
+                }}
+              >
+                Previous
+              </Button>
+              <Button
+                className="part-display__navigation-button-item"
+                onClick={() => {
+                  setNewPart(true);
+                }}
+              >
+                New Part
+              </Button>
+            </div>
           </React.Fragment>
         )}
         {activePart && (
@@ -125,7 +130,7 @@ const PartDisplay = (props) => {
               className="part-display__navigation-button-item"
               type="submit"
               onClick={props.onPrevious}
-              disabled={!previousPart}
+              disabled={!props.previousPart}
             >
               Previous
             </Button>

@@ -8,11 +8,14 @@ import PartDisplay from "./PartDisplay";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
+import "./styling/ActiveCounter.css";
+
 const ActiveCounter = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [activePart, setActivePart] = useState();
   const [activeCount, setActiveCount] = useState();
+  const [previousPart, setPreviousPart] = useState(false);
 
   useEffect(() => {
     const startCount = async () => {
@@ -38,6 +41,7 @@ const ActiveCounter = (props) => {
           }
         );
         setActiveCount(count);
+        console.log(count.status.counted.length);
         setActivePart(count.status.toCount[0]);
       } catch (err) {}
     };
@@ -57,6 +61,7 @@ const ActiveCounter = (props) => {
       if (responseData) {
         console.log(responseData);
         setActiveCount(responseData);
+        setPreviousPart(responseData.status.counted.length !== 0);
         setActivePart(responseData.status.toCount[0]);
       }
     }; //find active count and get part number at the start of to count
@@ -87,39 +92,70 @@ const ActiveCounter = (props) => {
           Authorization: `Bearer ${auth.token}`,
         }
       );
+      const tempCount = activeCount;
+      tempCount.status.counted.push({ partNumber: activePart, value: counted });
+      tempCount.status.toCount.shift();
+      setActiveCount(tempCount);
       setActivePart(nextPart);
-    } catch (err) {}
+      setPreviousPart(true);
+    } catch (error) {}
   };
   const previousHandler = async () => {
     try {
-      let requestData = {
-        cid: activeCount._id,
-      };
       const prevPart = await sendRequest(
         `${process.env.REACT_APP_BACKEND_API_URL}/inventory/undoCount/`,
         "PATCH",
-        JSON.stringify(requestData),
+        JSON.stringify({ cid: activeCount._id }),
         {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth.token}`,
         }
       );
+      const tempCount = activeCount;
+      tempCount.status.toCount.unshift(
+        tempCount.status.counted[tempCount.status.counted.length - 1].partNumber //get the last part number in the counter array
+      );
+      tempCount.status.counted.pop();
+      setActiveCount(tempCount);
       setActivePart(prevPart);
-    } catch (err) {}
+      setPreviousPart(activeCount.status.counted.length !== 0);
+    } catch (error) {}
   };
   const postponeHandler = () => {};
 
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <h1 className="center">{props.store.name}</h1>
+
       <Card>
+        <div className="active-counter__header">
+          <Button
+            className="active-counter__header-close-button-item"
+            onClick={() => {
+              props.closeCount();
+            }}
+          >
+            Home
+          </Button>
+          <h1 className="active-counter__header-title center">
+            {props.store.name}
+          </h1>
+          <Button
+            className="active-counter__header-submit-button-item"
+            onClick={() => {
+              props.submitCount();
+            }}
+          >
+            Submit
+          </Button>
+        </div>
         {isLoading && <LoadingSpinner asOverlay />}
+
         {activePart && activeCount && (
           <PartDisplay
             store={props.store}
             partNumber={activePart}
-            previousPart={true} //!needs to be updated to keep track of if there is a previous part
+            previousPart={previousPart}
             onNext={(count) => {
               nextHandler(count);
             }}

@@ -16,6 +16,10 @@ const Count = () => {
   const closeCountHandler = () => {
     setActiveCount(null);
   };
+  const submitCountHandler = () => {
+    setActiveCount(null);
+    //!need to submit count
+  };
 
   const stores = auth.permissions.map((permission) => {
     return (
@@ -46,6 +50,7 @@ const Count = () => {
           store={activeCount.store}
           action={activeCount.action}
           closeCount={closeCountHandler}
+          submitCount={submitCountHandler}
         />
       )}
     </div>

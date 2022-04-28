@@ -43,7 +43,7 @@ const StoreMenu = (props) => {
     tempStore.inventoryCountHistory.push(tempStore.activateInventoryCount); //saves from needing to send back revised store between backend and frontend
     tempStore.activateInventoryCount = null;
     console.log(tempStore);
-    // try {
+    //! try {
     //   await sendRequest(
     //     `${process.env.REACT_APP_BACKEND_API_URL}/inventory/countNext/`,
     //     "PATCH",

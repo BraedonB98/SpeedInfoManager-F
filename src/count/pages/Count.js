@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import StoreMenu from "../components/StoreMenu";
 import ActiveCounter from "../components/ActiveCounter";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 import "./styling/Count.css";
 
 const Count = () => {
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [activeCount, setActiveCount] = useState();
   const auth = useContext(AuthContext);
   const activateCountHandler = (countInfo) => {
@@ -16,27 +20,20 @@ const Count = () => {
   const closeCountHandler = () => {
     setActiveCount(null);
   };
-  const submitCountHandler = (store) => {
-    console.log("submitting count");
-    //!get store -- not all stores passed in may be accurate
-
-    var tempStore = store; //!can get rid of temp store because I am no longer on use state
-    tempStore.inventoryCountHistory.push(tempStore.activateInventoryCount); //saves from needing to send back revised store between backend and frontend
-    tempStore.activateInventoryCount = null;
-    //console.log(tempStore);
-    //! try {
-    //   await sendRequest(
-    //     `${process.env.REACT_APP_BACKEND_API_URL}/inventory/countNext/`,
-    //     "PATCH",
-    //     JSON.stringify({ sid: store.storeNumber }),
-    //     {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${auth.token}`,
-    //     }
-    //   );
-    //   setStore(tempStore);
-    //   setActiveCount(null);
-    // } catch (error) {}
+  const submitCountHandler = async (store) => {
+    console.log(store.storeNumber);
+    try {
+      const closedCount = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_API_URL}/inventory/closeCount/`,
+        "PATCH",
+        JSON.stringify({ sid: store.storeNumber }),
+        {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        }
+      );
+      setActiveCount(closedCount);
+    } catch (error) {}
   };
 
   const stores = auth.permissions.map((permission) => {
@@ -55,13 +52,15 @@ const Count = () => {
 
   return (
     <div className="count">
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && <LoadingSpinner asOverlay />}
       {!activeCount && (
         <React.Fragment>
           <h1 className="center">Inventory</h1>
           <ul className="count__store-menu-list">{stores}</ul>
         </React.Fragment>
       )}
-      {activeCount && (
+      {activeCount && !activeCount.complete && (
         <ActiveCounter
           store={activeCount.store}
           action={activeCount.action}
@@ -69,6 +68,7 @@ const Count = () => {
           submitCount={submitCountHandler}
         />
       )}
+      {activeCount && activeCount.complete && <h1>count complete</h1>}
     </div>
   );
 };

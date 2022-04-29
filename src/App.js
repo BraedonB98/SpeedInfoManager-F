@@ -1,14 +1,15 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; //also import Navigate for default routing
 
 import { AuthContext } from "./shared/context/auth-context";
 
-import AuthPage from "./users/pages/AuthPage";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import { UserAuth } from "./shared/hooks/auth-hook";
-import Dashboard from "./users/pages/Dashboard";
-import Count from "./count/pages/Count";
-import Parts from "./parts/pages/Parts";
+
+import AuthPage from "./users/pages/AuthPage";
+const Dashboard = React.lazy(() => import("./users/pages/Dashboard"));
+const Count = React.lazy(() => import("./count/pages/Count"));
+const Parts = React.lazy(() => import("./parts/pages/Parts"));
 
 function App() {
   const {

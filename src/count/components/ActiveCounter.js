@@ -64,7 +64,8 @@ const ActiveCounter = (props) => {
         setPreviousPart(responseData.status.counted.length !== 0);
         setActivePart(responseData.status.toCount[0]);
       }
-    }; //find active count and get part number at the start of to count
+    };
+    //find active count and get part number at the start of to count
     const restartCount = async () => {}; //!need to make backend be able to restart count
     console.log(props.action);
     if (props.action === "StartCount") {

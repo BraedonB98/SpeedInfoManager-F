@@ -65,7 +65,7 @@ const StoreMenu = (props) => {
             <Button
               className="store-menu__navigation-button-item"
               onClick={() => {
-                runCount("RetrieveCount");
+                props.viewCounts(store);
               }}
             >
               Retrieve Count

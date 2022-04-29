@@ -36,6 +36,29 @@ const Count = () => {
     } catch (error) {}
   };
 
+  const viewCountHandler = (store) => {
+    const getCount = async (cid) => {
+      let count;
+      try {
+        count = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_API_URL}/inventory/${cid}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${auth.token}` }
+        );
+        setActiveCount(count);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (store.inventoryCountHistory.length !== 0) {
+      getCount(
+        //!eventually display all counts by date, then when user selects one, pull it up
+        store.inventoryCountHistory[store.inventoryCountHistory.length - 1]
+      );
+    }
+  };
+
   const stores = auth.permissions.map((permission) => {
     return (
       <li className="count__storeMenuListItem" key={permission.storeID}>
@@ -44,6 +67,7 @@ const Count = () => {
             activateCountHandler(countInfo);
           }}
           submitCount={submitCountHandler}
+          viewCounts={viewCountHandler}
           storeNumber={permission.storeId}
         />
       </li>

@@ -93,7 +93,9 @@ const Count = () => {
           submitCount={submitCountHandler}
         />
       )}
-      {activeCount && activeCount.complete && <ReviewCount />}
+      {activeCount && activeCount.complete && (
+        <ReviewCount count={activeCount} />
+      )}
     </div>
   );
 };

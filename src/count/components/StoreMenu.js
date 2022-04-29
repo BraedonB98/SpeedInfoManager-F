@@ -61,12 +61,16 @@ const StoreMenu = (props) => {
               Start Count
             </Button>
           )}
-          {!activeCount && (
+          {!activeCount && store && (
             <Button
               className="store-menu__navigation-button-item"
               onClick={() => {
                 props.viewCounts(store);
               }}
+              disabled={
+                !store.inventoryCountHistory &&
+                store.inventoryCountHistory.length !== 0
+              }
             >
               Retrieve Count
             </Button>

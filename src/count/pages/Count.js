@@ -4,6 +4,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import StoreMenu from "../components/StoreMenu";
 import ActiveCounter from "../components/ActiveCounter";
+import ReviewCount from "../components/ReviewCount";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
@@ -92,7 +93,7 @@ const Count = () => {
           submitCount={submitCountHandler}
         />
       )}
-      {activeCount && activeCount.complete && <h1>count complete</h1>}
+      {activeCount && activeCount.complete && <ReviewCount />}
     </div>
   );
 };

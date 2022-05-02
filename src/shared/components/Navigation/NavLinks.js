@@ -9,7 +9,7 @@ import "./styling/NavLinks.css";
 
 const NavLinks = (props) => {
   const navigate = useNavigate();
-  const auth = useContext(AuthContext);
+  const auth = useContext(AuthContext); //eslint-disable-next-line
   const imageUrl = auth.imageUrl;
   const [showUserDropDown, setShowUserDropDown] = useState();
   const settingsHandler = (event) => {
@@ -23,9 +23,13 @@ const NavLinks = (props) => {
   };
   return (
     <ul className="nav-links">
+      {!auth.isLoggedIn && (
+        <NavItem to="/kart" title={"Kart Tracker"}></NavItem>
+      )}
       <NavItem to="/" title={auth.isLoggedIn ? "DashBoard" : "Login"}></NavItem>
       {auth.isLoggedIn && <NavItem to="/count" title={"Count"}></NavItem>}
       {auth.isLoggedIn && <NavItem to="/parts" title={"Parts"}></NavItem>}
+      {auth.isLoggedIn && <NavItem to="/kart" title={"Kart Tracker"}></NavItem>}
 
       {auth.isLoggedIn && props.userDropDown && (
         <NavItem

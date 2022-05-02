@@ -11,6 +11,7 @@ import AuthPage from "./users/pages/AuthPage";
 const Dashboard = React.lazy(() => import("./users/pages/Dashboard"));
 const Count = React.lazy(() => import("./count/pages/Count"));
 const Parts = React.lazy(() => import("./parts/pages/Parts"));
+const Kart = React.lazy(() => import("./kart/pages/KartOrder"));
 
 function App() {
   const {
@@ -33,12 +34,14 @@ function App() {
       <Routes>
         <Route path="/parts" exact element={<Parts />} />
         <Route path="/count" exact element={<Count />} />
+        <Route path="/kart" exact element={<Kart />} />
         <Route path="/" exact element={<Dashboard />} />
       </Routes>
     );
   } else {
     routes = (
       <Routes>
+        <Route path="/kart" exact element={<Kart />} />
         <Route path="*" element={<AuthPage />} />
       </Routes>
     );

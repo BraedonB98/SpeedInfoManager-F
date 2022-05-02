@@ -1,0 +1,8 @@
+.kart-order__display-div{
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.kart-order__row{
+    flex-grow: 1;
+}

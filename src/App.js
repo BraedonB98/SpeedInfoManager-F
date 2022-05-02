@@ -5,6 +5,7 @@ import { AuthContext } from "./shared/context/auth-context";
 
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import { UserAuth } from "./shared/hooks/auth-hook";
+import LoadingSpinner from "./shared/components/UIElements/LoadingSpinner";
 
 import AuthPage from "./users/pages/AuthPage";
 const Dashboard = React.lazy(() => import("./users/pages/Dashboard"));
@@ -62,7 +63,17 @@ function App() {
     >
       <Router>
         <MainNavigation />
-        <main>{routes}</main>
+        <main>
+          <Suspense
+            fallback={
+              <div className="center">
+                <LoadingSpinner />
+              </div>
+            }
+          >
+            {routes}
+          </Suspense>
+        </main>
       </Router>
     </AuthContext.Provider>
   );

@@ -9,7 +9,7 @@
     "react-dropdown": "^1.9.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^5.0.0",
     "react-slideshow-image": "^3.7.0",
     "react-spreadsheet": "^0.7.0",
     "react-swipeable": "^6.2.0",
@@ -25,16 +25,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BraedonB98/SpeedInfoManager-F.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/BraedonB98/SpeedInfoManager-F/issues"
-  },
-  "homepage": "https://github.com/BraedonB98/SpeedInfoManager-F#readme",
   "browserslist": {
     "production": [
       ">0.2%",

@@ -40,7 +40,7 @@ const MainNavigation = (props) => {
             {" "}
             <img
               className="main-navigation__logo-image"
-              src={`/logo.svg`}
+              src={`./logo.svg`}
               alt="Speed Info Manager"
             />
           </Link>

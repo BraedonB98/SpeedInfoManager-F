@@ -1,3 +1,40 @@
 .kart-row__kart-list-item{
     list-style-type: none;
+    margin:0;
+    padding:0;
 }
+.kart-row__kart-list{
+    margin:0;
+    padding: 0;
+}
+
+.kart-row__kart-list-item-button{
+    margin: 1px;
+    width: 100%;
+}
+.kart-row__row-title{
+    font-weight: bold;
+}
+.kart-row__row-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 450px) {
+    .kart-row__kart-list-item{
+        font-size: x-small;
+    }
+    .kart-row__row-title{
+        font-size: x-small;
+    }
+    .kart-row__row-div{
+        padding:0;
+        margin:0;
+    }
+    .kart-row__kart-list-item-button{
+        margin: 0px;
+        width: auto;
+    }
+  }

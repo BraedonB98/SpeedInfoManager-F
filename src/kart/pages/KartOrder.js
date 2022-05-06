@@ -19,21 +19,25 @@ const KartOrder = () => {
           className="kart-order__row"
           name="Row 4"
           kartsInRow={rows[3]}
+          row={3}
         />
         <KartRow
           className="kart-order__row"
           name="Row 3"
           kartsInRow={rows[2]}
+          row={2}
         />
         <KartRow
           className="kart-order__row"
           name="Row 2"
           kartsInRow={rows[1]}
+          row={1}
         />
         <KartRow
           className="kart-order__row"
           name="Row 1"
           kartsInRow={rows[0]}
+          row={0}
         />
       </div>
     </React.Fragment>

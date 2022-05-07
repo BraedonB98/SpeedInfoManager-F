@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useReducer, useContext, useState } from "react";
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
 import { AuthContext } from "../../shared/context/auth-context";
@@ -9,7 +9,7 @@ const EditKartRowModal = (props) => {
   const [kartCount, setKartCount] = useState(props.kartPreset.length);
 
   const kartCountOptions = props.kartOptions.map((countOption) => {
-    return <option name={countOption}>{countOption}</option>;
+    return <option value={countOption}>{countOption}</option>;
   });
 
   const submitHandler = () => {
@@ -17,8 +17,8 @@ const EditKartRowModal = (props) => {
   };
 
   const kartCountChangeHandler = (event) => {
-    console.log(kartCount);
-    setKartCount(event.target.value);
+    const selection = event.target.value;
+    setKartCount(selection);
     console.log(kartCount);
   };
   return (

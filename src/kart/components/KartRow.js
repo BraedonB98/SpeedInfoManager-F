@@ -63,6 +63,7 @@ const KartRow = (props) => {
           setEditRowModal(false);
         }}
         kartPreset={karts}
+        kartCount={karts.length}
         kartOptions={[12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]}
       />
       <Card className="kart-row__row-div">

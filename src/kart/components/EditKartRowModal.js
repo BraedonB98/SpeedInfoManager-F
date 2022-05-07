@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
 import Input from "../../shared/components/FormElements/Input";
@@ -6,8 +6,6 @@ import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
 import { useForm } from "../../shared/hooks/form-hook";
 
 const EditKartRowModal = (props) => {
-  const [karts, setKarts] = useState(props.kartPreset);
-  const [kartCount, setKartCount] = useState(props.kartPreset.length);
   const [formState, inputHandler] = useForm(
     {
       kartCount: {
@@ -21,6 +19,13 @@ const EditKartRowModal = (props) => {
     },
     true
   );
+  //this will change the number of kart number inputs to the number of karts in the row
+  useEffect(() => {
+    var row = []; //!this need to actually put inputs into modal
+    for (let i = 0; i < formState.inputs.kartCount.value; i++) {
+      row.push(i);
+    }
+  }, [formState.inputs.kartCount.value]);
 
   const kartCountOptions = props.kartOptions.map((countOption) => {
     return <option value={countOption}>{countOption}</option>;
@@ -29,7 +34,7 @@ const EditKartRowModal = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    console.log(formState.inputs.kartCount.value); //!WHY IS THIS READING 0!!! the input js is outputing the correct value on change
+    console.log(formState.inputs.kartCount.value);
     props.onClear();
   };
 

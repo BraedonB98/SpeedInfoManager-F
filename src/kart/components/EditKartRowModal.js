@@ -69,11 +69,11 @@ const EditKartRowModal = (props) => {
         <div id="edit-kart-row-modal__form">
           <Input
             className="new-item-modal__text-input new-item-modal__input"
-            id="partNumber"
+            id="kartCount"
             element="select"
             label="Karts In Row"
             validators={[VALIDATOR_REQUIRE()]}
-            errorText=""
+            errorText="invalid input"
             onInput={inputHandler}
             initialValue={props.kartCount}
             initialValid={true}

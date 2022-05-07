@@ -60,6 +60,17 @@ const Input = (props) => {
         max={props.max}
       />
     );
+  } else if (props.element === "select") {
+    element = (
+      <select
+        id={props.id}
+        onChange={changeHandler}
+        onBlur={touchHandler}
+        value={inputState.value}
+      >
+        {props.children}
+      </select>
+    );
   } else if (props.element === "date" || props.element === "time") {
     element = (
       <input

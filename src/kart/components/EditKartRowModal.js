@@ -1,12 +1,23 @@
 import React, { useReducer, useContext, useState } from "react";
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
-import { AuthContext } from "../../shared/context/auth-context";
+import Input from "../../shared/components/FormElements/Input";
+
+import { useForm } from "../../shared/hooks/form-hook";
 
 const EditKartRowModal = (props) => {
-  const auth = useContext(AuthContext);
   const [karts, setKarts] = useState(props.kartPreset);
   const [kartCount, setKartCount] = useState(props.kartPreset.length);
+
+  const [formState, inputHandler, setFormData] = useForm(
+    {
+      kartCount: {
+        value: props.kartPreset.length,
+        isValid: true,
+      },
+    },
+    false
+  );
 
   const kartCountOptions = props.kartOptions.map((countOption) => {
     return <option value={countOption}>{countOption}</option>;
@@ -16,11 +27,6 @@ const EditKartRowModal = (props) => {
     props.onClear();
   };
 
-  const kartCountChangeHandler = (event) => {
-    const selection = event.target.value;
-    setKartCount(selection);
-    console.log(kartCount);
-  };
   return (
     <React.Fragment>
       <Modal
@@ -55,14 +61,19 @@ const EditKartRowModal = (props) => {
         }
       >
         <div id="edit-kart-row-modal__form">
-          <select
-            id="karts"
-            name="karts"
-            value={kartCount}
-            onChange={kartCountChangeHandler}
+          <Input
+            className="new-item-modal__text-input new-item-modal__input"
+            id="partNumber"
+            element="select"
+            label="Karts In Row"
+            validators={[]}
+            errorText=""
+            onInput={inputHandler}
+            initialValue={props.kartPreset.length}
+            initialValid={true}
           >
             {kartCountOptions}
-          </select>
+          </Input>
         </div>
       </Modal>
     </React.Fragment>
